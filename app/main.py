@@ -4,10 +4,13 @@ from app.db import Base, engine
 # from app.models import Product
 
 # Create tables on startup
-# TODO need to experiment with this
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
+
+@app.on_event("startup")
+def on_startup():
+    # Runs only when app starts, NOT during imports
+    Base.metadata.create_all(bind=engine)
+
 app.include_router(products.router)
 
 
