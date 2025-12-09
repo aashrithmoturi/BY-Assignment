@@ -15,7 +15,5 @@ class ProductUpdate(BaseModel):
 
 class Product(ProductBase):
     id: int
-
-    # TODO try playing with this remove
     class Config:
         orm_mode = True

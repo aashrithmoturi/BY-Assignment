@@ -3,8 +3,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import create_engine
 from app.main import app
-from app.db import get_db, Base
-# Base must be imported shouldn't create here because models in the code are using app.db.Base
+from app.db import get_db, Base # Base must be imported shouldn't create here because models in the code are using app.db.Base
+
 
 # db url has to be local not the docker one
 engine = create_engine(
@@ -15,6 +15,7 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
+
 # this runs before every test
 @pytest.fixture(autouse=True)
 def clean_db(session: Session):
@@ -24,6 +25,7 @@ def clean_db(session: Session):
         session.execute(table.delete())
     session.commit()
 
+
 @pytest.fixture(name="session")
 def session_fixture():
     session = TestingSessionLocal()
@@ -31,6 +33,7 @@ def session_fixture():
         yield session
     finally:
         session.close()
+
 
 @pytest.fixture(name="client")  
 def client_fixture(session: Session):  

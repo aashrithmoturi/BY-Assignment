@@ -2,7 +2,6 @@ from app.schemas import ProductCreate, ProductUpdate
 from app import models
 from sqlalchemy.orm import Session
 
-# TODO how does db.query look like
 def get_all_products(db: Session):
     return db.query(models.Product).all()
 

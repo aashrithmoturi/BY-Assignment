@@ -74,7 +74,6 @@ def test_delete_product(client):
     response = client.delete(f"/products/{pid}")
     assert response.status_code == 200
 
-    # Now product should be gone
     response2 = client.get(f"/products/{pid}")
     assert response2.status_code == 404
 

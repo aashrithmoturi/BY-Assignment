@@ -13,7 +13,6 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, futu
 Base = declarative_base()
 
 # will be used for dependecy injection
-# TODO need to know the exact working of this
 def get_db():
     db = SessionLocal()
     try:
